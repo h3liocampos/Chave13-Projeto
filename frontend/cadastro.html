@@ -1,132 +1,307 @@
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-5">
-            <!-- Card Principal -->
-            <div class="card shadow-lg border-0 rounded-4">
-                <div class="card-body p-4 p-sm-5">
-                    
-                    <!-- Cabeçalho da Tela -->
-                    <div class="text-center mb-4">
-                        <div class="bg-primary bg-gradient text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
-                            <span class="fs-3 fw-bold">C13</span>
-                        </div>
-                        <h3 class="fw-bold text-dark mb-1">Criar Conta</h3>
-                        <p class="text-muted small">Preencha os dados abaixo para se cadastrar no CHAVE13</p>
-                    </div>
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-                    <!-- Formulário -->
-                    <form id="form-cadastro" novalidate>
-                        <!-- Campo Nome -->
-                        <div class="mb-3">
-                            <label for="nome" class="form-label small fw-semibold text-secondary">Nome Completo</label>
-                            <input type="text" class="form-control form-control-lg rounded-3 fs-6" id="nome" placeholder="Digite seu nome" required>
-                        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-                        <!-- Campo E-mail -->
-                        <div class="mb-3">
-                            <label for="email" class="form-label small fw-semibold text-secondary">E-mail</label>
-                            <input type="email" class="form-control form-control-lg rounded-3 fs-6" id="email" placeholder="nome@exemplo.com" required>
-                        </div>
+    <title>CHAVE 13 - Login</title>
 
-                        <!-- Campo Senha -->
-                        <div class="mb-3">
-                            <label for="senha" class="form-label small fw-semibold text-secondary">Senha</label>
-                            <input type="password" class="form-control form-control-lg rounded-3 fs-6" id="senha" placeholder="No mínimo 6 caracteres" required>
-                        </div>
+    <link rel="stylesheet"
+          href="{{ url_for('front-end', filename='css/style.css') }}">
+</head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-                        <!-- NOVO: Campo Telefone (Necessário para o Back-end) -->
-                        <div class="mb-3">
-                            <label for="telefone" class="form-label small fw-semibold text-secondary">Telefone</label>
-                            <input type="tel" class="form-control form-control-lg rounded-3 fs-6" id="telefone" placeholder="(00) 00000-0000" required>
-                        </div>
+        body {
+            min-height: 100vh;
+            background: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-                        <!-- NOVO: Campo Perfil (Necessário para o Back-end) -->
-                        <div class="mb-4">
-                            <label for="perfil" class="form-label small fw-semibold text-secondary">Perfil de Usuário</label>
-                            <select class="form-select form-select-lg rounded-3 fs-6" id="perfil" required>
-                                <option value="cliente" selected>Cliente</option>
-                                <option value="admin">Administrador</option>
-                                <option value="funcionario">Funcionário</option>
-                            </select>
-                        </div>
+        .container {
+            width: 100%;
+            max-width: 520px;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
 
-                        <!-- Botão de Envio -->
-                        <button type="submit" class="btn btn-primary btn-lg w-100 rounded-3 fs-6 fw-semibold py-2.5 shadow-sm">
-                            Finalizar Cadastro
-                        </button>
-                    </form>
+        .logo {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
 
-                    <!-- Link de Retorno -->
-                    <div class="text-center mt-4">
-                        <p class="small text-muted mb-0">Já tem uma conta? 
-                            <a href="/home" onclick="navegarPara('/home', event)" class="text-decoration-none fw-semibold">Fazer Login</a>
-                        </p>
-                    </div>
+        .logo span {
+            color: #f5b400;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+        .subtitulo {
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .campo {
+            margin-bottom: 18px;
+        }
+
+        .campo label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .campo input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #d5d5d5;
+            border-radius: 8px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .campo input:focus {
+            border-color: #f5b400;
+            box-shadow: 0 0 0 3px rgba(245, 180, 0, 0.12);
+        }
+
+        .senha-container {
+            position: relative;
+        }
+
+        .senha-container input {
+            padding-right: 75px;
+        }
+
+        .mostrar {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .btn-cadastrar {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #f5b400;
+            color: #111;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-cadastrar:hover {
+            background: #dda300;
+        }
+
+        .btn-voltar {
+            width: 100%;
+            padding: 12px;
+            margin-top: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            color: #555;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-voltar:hover {
+            background: #f5f5f5;
+        }
+
+        #mensagem {
+            min-height: 20px;
+            margin-top: 15px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="logo">
+            CHAVE <span>13</span>
+        </div>
+
+        <h1>Crie sua conta</h1>
+
+        <p class="subtitulo">
+            Preencha seus dados para começar.
+        </p>
+
+        <form id="usuarioForm">
+
+            <div class="campo">
+                <label for="nome">
+                    Nome completo
+                </label>
+
+                <input
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    placeholder="Digite seu nome completo"
+                    maxlength="100"
+                    required
+                >
+            </div>
+
+            <div class="campo">
+                <label for="email">
+                    E-mail
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Digite seu e-mail"
+                    maxlength="120"
+                    autocomplete="email"
+                    required
+                >
+            </div>
+
+            <div class="campo">
+                <label for="telefone">
+                    Celular
+                </label>
+
+                <input
+                    type="tel"
+                    id="telefone"
+                    name="telefone"
+                    placeholder="(00) 00000-0000"
+                    maxlength="15"
+                    inputmode="numeric"
+                >
+            </div>
+
+            <div class="campo">
+                <label for="senha">
+                    Senha
+                </label>
+
+                <div class="senha-container">
+
+                    <input
+                        type="password"
+                        id="senha"
+                        name="senha"
+                        placeholder="Digite sua senha"
+                        maxlength="255"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="mostrar"
+                        onclick="mostrarSenha('senha')"
+                    >
+                        Mostrar
+                    </button>
 
                 </div>
             </div>
-        </div>
+
+            <div class="campo">
+                <label for="confirmar_senha">
+                    Confirmar senha
+                </label>
+
+                <div class="senha-container">
+
+                    <input
+                        type="password"
+                        id="confirmar_senha"
+                        name="confirmar_senha"
+                        placeholder="Digite a senha novamente"
+                        maxlength="255"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="mostrar"
+                        onclick="mostrarSenha('confirmar_senha')"
+                    >
+                        Mostrar
+                    </button>
+
+                </div>
+            </div>
+
+            <input
+                type="hidden"
+                id="perfil"
+                name="perfil"
+                value="usuario"
+            >
+
+            <button
+                type="submit"
+                class="btn-cadastrar"
+            >
+                Criar conta
+            </button>
+
+            <div id="mensagem"></div>
+
+            <button
+                type="button"
+                class="btn-voltar"
+                onclick="window.location.href='/cadastro'"
+            >
+                Voltar
+            </button>
+
+        </form>
+
     </div>
-</div>
 
-<script>
-    (() => {
-        const form = document.getElementById('form-cadastro');
-        
-        if (form) {
-            form.addEventListener('submit', async (event) => {
-                event.preventDefault(); 
-                
-                // Captura os valores digitados na tela
-                const nome = document.getElementById('nome').value.trim();
-                const email = document.getElementById('email').value.trim();
-                const senha = document.getElementById('senha').value;
-                const telefone = document.getElementById('telefone').value.trim();
-                const perfil = document.getElementById('perfil').value;
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
 
-                // Validação visual rápida antes do envio
-                if (!nome || !email || !senha || !telefone || !perfil) {
-                    alert("Por favor, preencha todos os campos obrigatórios!");
-                    return;
-                }
+</body>
 
-                // Monta o objeto exatamente com as chaves esperadas pelo seu dados['...'] no Flask
-                const payload = {
-                    nome: nome,
-                    email: email,
-                    senha: senha,
-                    telefone: telefone,
-                    perfil: perfil
-                };
-
-                try {
-                    // Executa a requisição POST para a sua API do Flask [1]
-                    const resposta = await fetch('/api/usuarios', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json' // Avisa o Flask que estamos enviando JSON
-                        },
-                        body: JSON.stringify(payload) // Converte o objeto JS para texto JSON
-                    });
-
-                    const resultado = await resposta.json();
-
-                    if (resposta.ok) {
-                        // Sucesso (Status 201 criado pelo seu back-end)
-                        alert(`Sucesso: ${resultado.mensagem} (ID: ${resultado.id})`);
-                        
-                        // Redireciona o usuário para a página inicial da SPA após o cadastro
-                        navegarPara('/home');
-                    } else {
-                        // Trata erros de validação vindos do Flask (como o erro 400 de chave ausente)
-                        alert(`Erro no cadastro: ${resultado.erro || resultado.mensagem}`);
-                    }
-
-                } catch (erro) {
-                    console.error("Erro na comunicação com o servidor:", erro);
-                    alert("Não foi possível conectar ao servidor. Verifique se o Flask está rodando.");
-                }
-            });
-        }
-    })();
-</script>
+</html>
