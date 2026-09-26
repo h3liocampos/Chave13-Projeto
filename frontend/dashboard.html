@@ -1,0 +1,1877 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CHAVE13 - Meu veículo</title>
+
+
+    <!-- Bootstrap 5.3.8 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+        crossorigin="anonymous"
+    >
+
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+
+    <style>
+
+        :root {
+            --amarelo: #f5b400;
+            --amarelo-hover: #dca300;
+            --preto: #111111;
+            --preto-2: #181818;
+            --cinza-bg: #f5f5f5;
+            --cinza: #737373;
+            --borda: #e8e8e8;
+            --verde: #19a463;
+            --azul: #3478f6;
+        }
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            margin: 0;
+            background: var(--cinza-bg);
+            color: #171717;
+
+            font-family:
+                Inter,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+        }
+
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =========================================
+           SIDEBAR
+        ========================================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+
+            width: 250px;
+            height: 100vh;
+
+            background: var(--preto);
+
+            color: white;
+
+            padding: 28px 18px;
+
+            z-index: 1000;
+        }
+
+
+        .logo {
+            padding: 0 15px;
+            margin-bottom: 42px;
+
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+
+        .logo span {
+            color: var(--amarelo);
+        }
+
+
+        .menu-title {
+            padding: 0 15px;
+            margin-bottom: 12px;
+
+            color: #777;
+            font-size: 10px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+
+        .menu a {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            padding: 13px 15px;
+
+            border-radius: 10px;
+
+            color: #a8a8a8;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition: .2s;
+        }
+
+
+        .menu a:hover,
+        .menu a.active {
+            background: #242424;
+            color: white;
+        }
+
+
+        .menu a.active {
+            border-left: 3px solid var(--amarelo);
+        }
+
+
+        .menu i {
+            width: 20px;
+            font-size: 17px;
+        }
+
+
+        .sidebar-bottom {
+            position: absolute;
+            left: 18px;
+            right: 18px;
+            bottom: 25px;
+
+            padding: 16px;
+
+            border-radius: 13px;
+
+            background: #1c1c1c;
+        }
+
+
+        .user-mini {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: var(--amarelo);
+            color: #111;
+
+            font-weight: 800;
+        }
+
+
+        .user-mini strong {
+            display: block;
+            color: white;
+            font-size: 13px;
+        }
+
+
+        .user-mini small {
+            color: #777;
+        }
+
+
+        /* =========================================
+           CONTEÚDO
+        ========================================= */
+
+        .main {
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+
+
+        .topbar {
+            height: 76px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 38px;
+
+            background: white;
+            border-bottom: 1px solid var(--borda);
+        }
+
+
+        .topbar h6 {
+            margin: 0;
+            font-weight: 800;
+        }
+
+
+        .notification {
+            position: relative;
+
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            color: #555;
+
+            cursor: pointer;
+        }
+
+
+        .notification:hover {
+            background: #f5f5f5;
+        }
+
+
+        .notification-dot {
+            position: absolute;
+
+            width: 8px;
+            height: 8px;
+
+            right: 7px;
+            top: 7px;
+
+            background: var(--amarelo);
+
+            border: 2px solid white;
+
+            border-radius: 50%;
+        }
+
+
+        .content {
+            padding: 35px 38px 60px;
+            max-width: 1500px;
+        }
+
+
+        /* =========================================
+           SAUDAÇÃO
+        ========================================= */
+
+        .welcome {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            margin-bottom: 28px;
+        }
+
+
+        .welcome h1 {
+            margin: 0 0 5px;
+
+            font-size: 29px;
+            font-weight: 850;
+            letter-spacing: -1px;
+        }
+
+
+        .welcome p {
+            margin: 0;
+            color: var(--cinza);
+            font-size: 14px;
+        }
+
+
+        .btn-yellow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 11px 18px;
+
+            border: 0;
+            border-radius: 9px;
+
+            background: var(--amarelo);
+            color: #111;
+
+            font-size: 13px;
+            font-weight: 800;
+
+            transition: .2s;
+        }
+
+
+        .btn-yellow:hover {
+            background: var(--amarelo-hover);
+            color: #111;
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================================
+           CARD VEÍCULO
+        ========================================= */
+
+        .vehicle-card {
+            position: relative;
+            overflow: hidden;
+
+            min-height: 260px;
+
+            padding: 28px;
+
+            border-radius: 18px;
+
+            background: var(--preto);
+
+            color: white;
+
+            box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
+        }
+
+
+        .vehicle-card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 280px;
+            height: 280px;
+
+            right: -100px;
+            top: -130px;
+
+            border-radius: 50%;
+
+            background: rgba(245, 180, 0, .10);
+        }
+
+
+        .vehicle-top {
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+            justify-content: space-between;
+        }
+
+
+        .vehicle-label {
+            color: #999;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+
+        .vehicle-name {
+            margin-top: 5px;
+
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+
+        .plate {
+            padding: 6px 11px;
+
+            border: 1px solid #444;
+            border-radius: 6px;
+
+            color: #ddd;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+
+        .car-icon {
+            position: absolute;
+
+            right: 35px;
+            bottom: 27px;
+
+            color: var(--amarelo);
+
+            font-size: 105px;
+            opacity: .9;
+        }
+
+
+        .vehicle-info {
+            position: absolute;
+
+            left: 28px;
+            bottom: 25px;
+
+            display: flex;
+            gap: 28px;
+
+            z-index: 2;
+        }
+
+
+        .vehicle-info small {
+            display: block;
+
+            color: #888;
+
+            font-size: 10px;
+            text-transform: uppercase;
+        }
+
+
+        .vehicle-info strong {
+            font-size: 14px;
+        }
+
+
+        /* =========================================
+           STATUS
+        ========================================= */
+
+        .status-card {
+            height: 100%;
+
+            padding: 25px;
+
+            border: 1px solid var(--borda);
+            border-radius: 18px;
+
+            background: white;
+        }
+
+
+        .section-title {
+            margin-bottom: 20px;
+
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 15px;
+        }
+
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+
+            padding: 7px 10px;
+
+            border-radius: 20px;
+
+            background: #fff4d0;
+            color: #8a6500;
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: var(--amarelo);
+        }
+
+
+        .progress {
+            height: 9px;
+
+            background: #eeeeee;
+
+            border-radius: 10px;
+        }
+
+
+        .progress-bar {
+            background: var(--amarelo);
+        }
+
+
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+
+            margin-top: 8px;
+
+            color: #999;
+            font-size: 10px;
+        }
+
+
+        /* =========================================
+           TIMELINE
+        ========================================= */
+
+        .timeline {
+            margin-top: 25px;
+        }
+
+
+        .timeline-item {
+            position: relative;
+
+            display: flex;
+            gap: 13px;
+
+            padding-bottom: 19px;
+        }
+
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+
+        .timeline-icon {
+            position: relative;
+            z-index: 2;
+
+            min-width: 29px;
+            height: 29px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #f0f0f0;
+            color: #999;
+
+            font-size: 12px;
+        }
+
+
+        .timeline-item.done .timeline-icon {
+            background: var(--amarelo);
+            color: #111;
+        }
+
+
+        .timeline-item.current .timeline-icon {
+            background: #111;
+            color: var(--amarelo);
+        }
+
+
+        .timeline-item:not(:last-child)::after {
+            content: "";
+
+            position: absolute;
+
+            left: 14px;
+            top: 29px;
+            bottom: 0;
+
+            width: 1px;
+
+            background: #ddd;
+        }
+
+
+        .timeline-text strong {
+            display: block;
+
+            margin-bottom: 2px;
+
+            font-size: 12px;
+        }
+
+
+        .timeline-text span {
+            color: #999;
+            font-size: 11px;
+        }
+
+
+        /* =========================================
+           CARDS
+        ========================================= */
+
+        .white-card {
+            padding: 24px;
+
+            border: 1px solid var(--borda);
+            border-radius: 18px;
+
+            background: white;
+        }
+
+
+        .card-header-custom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 20px;
+        }
+
+
+        .card-header-custom h3 {
+            margin: 0;
+
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+
+        .see-all {
+            color: #777;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+
+        .see-all:hover {
+            color: #111;
+        }
+
+
+        /* =========================================
+           ATIVIDADE
+        ========================================= */
+
+        .activity {
+            display: flex;
+            gap: 14px;
+
+            padding: 14px 0;
+
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+
+        .activity:last-child {
+            border-bottom: 0;
+        }
+
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+
+            min-width: 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 11px;
+
+            background: #fff5d6;
+            color: #b27c00;
+        }
+
+
+        .activity-content {
+            flex: 1;
+        }
+
+
+        .activity-content strong {
+            display: block;
+
+            font-size: 13px;
+        }
+
+
+        .activity-content p {
+            margin: 3px 0;
+
+            color: #777;
+
+            font-size: 12px;
+        }
+
+
+        .activity-time {
+            color: #aaa;
+            font-size: 10px;
+        }
+
+
+        /* =========================================
+           ORÇAMENTO
+        ========================================= */
+
+        .budget-value {
+            margin-bottom: 4px;
+
+            font-size: 29px;
+            font-weight: 850;
+        }
+
+
+        .budget-sub {
+            color: #888;
+            font-size: 11px;
+        }
+
+
+        .budget-row {
+            display: flex;
+            justify-content: space-between;
+
+            padding: 11px 0;
+
+            border-bottom: 1px solid #f1f1f1;
+
+            font-size: 12px;
+        }
+
+
+        .budget-row span:last-child {
+            font-weight: 700;
+        }
+
+
+        .budget-total {
+            display: flex;
+            justify-content: space-between;
+
+            margin-top: 12px;
+
+            font-size: 14px;
+            font-weight: 850;
+        }
+
+
+        /* =========================================
+           MENSAGEM
+        ========================================= */
+
+        .message-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            padding: 17px;
+
+            border-radius: 14px;
+
+            background: #111;
+
+            color: white;
+        }
+
+
+        .mechanic-avatar {
+            width: 44px;
+            height: 44px;
+
+            min-width: 44px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: var(--amarelo);
+            color: #111;
+
+            font-weight: 800;
+        }
+
+
+        .message-box strong {
+            display: block;
+            font-size: 13px;
+        }
+
+
+        .message-box p {
+            margin: 3px 0 0;
+
+            color: #bbb;
+
+            font-size: 11px;
+        }
+
+
+        .message-button {
+            margin-left: auto;
+
+            padding: 9px 13px;
+
+            border: 1px solid #444;
+            border-radius: 8px;
+
+            background: transparent;
+            color: white;
+
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+
+        .message-button:hover {
+            background: #292929;
+        }
+
+
+        /* =========================================
+           FOTOS
+        ========================================= */
+
+        .photo-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 8px;
+        }
+
+
+        .photo {
+            height: 90px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #292929,
+                    #555
+                );
+
+            color: white;
+
+            overflow: hidden;
+
+            position: relative;
+        }
+
+
+        .photo i {
+            font-size: 25px;
+            opacity: .5;
+        }
+
+
+        .photo span {
+            position: absolute;
+
+            left: 7px;
+            bottom: 6px;
+
+            padding: 3px 6px;
+
+            border-radius: 5px;
+
+            background: rgba(0,0,0,.6);
+
+            font-size: 9px;
+        }
+
+
+        /* =========================================
+           RESPONSIVO
+        ========================================= */
+
+        @media (max-width: 1100px) {
+
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                margin-left: 210px;
+            }
+
+            .content {
+                padding: 25px;
+            }
+
+            .car-icon {
+                opacity: .35;
+            }
+
+        }
+
+
+        @media (max-width: 800px) {
+
+            .sidebar {
+                position: static;
+
+                width: 100%;
+                height: auto;
+
+                padding: 15px;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            .menu-title,
+            .sidebar-bottom {
+                display: none;
+            }
+
+            .menu {
+                flex-direction: row;
+                overflow-x: auto;
+            }
+
+            .menu a {
+                white-space: nowrap;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .topbar {
+                padding: 0 20px;
+            }
+
+            .content {
+                padding: 25px 18px 45px;
+            }
+
+            .welcome {
+                display: block;
+            }
+
+            .welcome .btn-yellow {
+                margin-top: 18px;
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            .vehicle-info {
+                gap: 15px;
+            }
+
+            .car-icon {
+                display: none;
+            }
+
+            .vehicle-card {
+                min-height: 235px;
+            }
+
+            .photo {
+                height: 75px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            CHAVE <span>13</span>
+        </div>
+
+
+        <div class="menu-title">
+            Minha oficina
+        </div>
+
+
+        <nav class="menu">
+
+            <a
+                href="/pagina/dashboard.html"
+                class="active"
+            >
+                <i class="bi bi-grid-1x2-fill"></i>
+                Visão geral
+            </a>
+
+
+            <a href="/pagina/meus-veiculos.html">
+                <i class="bi bi-car-front-fill"></i>
+                Meus veículos
+            </a>
+
+
+            <a href="/pagina/servicos.html">
+                <i class="bi bi-tools"></i>
+                Serviços
+            </a>
+
+
+            <a href="/pagina/conversas.html">
+                <i class="bi bi-chat-dots-fill"></i>
+                Conversas
+            </a>
+
+
+            <a href="/pagina/orcamentos.html">
+                <i class="bi bi-receipt"></i>
+                Orçamentos
+            </a>
+
+
+            <a href="/pagina/historico.html">
+                <i class="bi bi-clock-history"></i>
+                Histórico
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="user-mini">
+
+                <div class="avatar">
+                    JS
+                </div>
+
+                <div>
+                    <strong>João Silva</strong>
+                    <small>Cliente</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =========================================
+         CONTEÚDO
+    ========================================= -->
+
+    <main class="main">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div>
+                <h6>
+                    Acompanhamento
+                </h6>
+            </div>
+
+
+            <a
+                href="/pagina/producao"
+                class="notification"
+                title="Notificações"
+            >
+
+                <i class="bi bi-bell fs-5"></i>
+
+                <span class="notification-dot"></span>
+
+            </a>
+
+        </header>
+
+
+
+        <!-- CONTEÚDO -->
+
+        <div class="content">
+
+
+            <!-- SAUDAÇÃO -->
+
+            <div class="welcome">
+
+                <div>
+
+                    <h1>
+                        Olá, João 👋
+                    </h1>
+
+                    <p>
+                        Veja o que está acontecendo com seu veículo hoje.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="/pagina/producao"
+                    class="btn-yellow"
+                >
+                    <i class="bi bi-plus-lg"></i>
+                    Nova solicitação
+                </a>
+
+            </div>
+
+
+
+            <!-- =====================================
+                 VEÍCULO + STATUS
+            ====================================== -->
+
+            <div class="row g-4 mb-4">
+
+
+                <!-- VEÍCULO -->
+
+                <div class="col-lg-7">
+
+                    <a
+                        href="/pagina/producao"
+                        class="text-decoration-none"
+                    >
+
+                        <div class="vehicle-card">
+
+                            <div class="vehicle-top">
+
+                                <div>
+
+                                    <div class="vehicle-label">
+                                        Seu veículo
+                                    </div>
+
+                                    <div class="vehicle-name">
+                                        Honda Civic Touring
+                                    </div>
+
+                                </div>
+
+
+                                <div class="plate">
+                                    ABC-1D23
+                                </div>
+
+                            </div>
+
+
+                            <i class="bi bi-car-front-fill car-icon"></i>
+
+
+                            <div class="vehicle-info">
+
+                                <div>
+                                    <small>
+                                        Ano
+                                    </small>
+
+                                    <strong>
+                                        2022
+                                    </strong>
+                                </div>
+
+
+                                <div>
+                                    <small>
+                                        Quilometragem
+                                    </small>
+
+                                    <strong>
+                                        48.230 km
+                                    </strong>
+                                </div>
+
+
+                                <div>
+                                    <small>
+                                        Oficina
+                                    </small>
+
+                                    <strong>
+                                        Auto Center 13
+                                    </strong>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </a>
+
+                </div>
+
+
+
+                <!-- STATUS -->
+
+                <div class="col-lg-5">
+
+                    <div class="status-card">
+
+                        <div class="status-header">
+
+                            <div class="section-title mb-0">
+                                Status do serviço
+                            </div>
+
+
+                            <div class="status-badge">
+
+                                <span class="status-dot"></span>
+
+                                Em andamento
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="d-flex justify-content-between mb-2">
+
+                            <strong style="font-size: 13px;">
+                                Revisão completa
+                            </strong>
+
+                            <strong style="font-size: 13px;">
+                                65%
+                            </strong>
+
+                        </div>
+
+
+                        <div class="progress">
+
+                            <div
+                                class="progress-bar"
+                                style="width: 65%"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="progress-labels">
+
+                            <span>
+                                Recebido
+                            </span>
+
+                            <span>
+                                Diagnóstico
+                            </span>
+
+                            <span>
+                                Execução
+                            </span>
+
+                            <span>
+                                Pronto
+                            </span>
+
+                        </div>
+
+
+
+                        <div class="timeline">
+
+                            <div class="timeline-item done">
+
+                                <div class="timeline-icon">
+                                    <i class="bi bi-check-lg"></i>
+                                </div>
+
+                                <div class="timeline-text">
+
+                                    <strong>
+                                        Veículo recebido
+                                    </strong>
+
+                                    <span>
+                                        Hoje, 08:42
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="timeline-item done">
+
+                                <div class="timeline-icon">
+                                    <i class="bi bi-check-lg"></i>
+                                </div>
+
+                                <div class="timeline-text">
+
+                                    <strong>
+                                        Diagnóstico realizado
+                                    </strong>
+
+                                    <span>
+                                        Hoje, 10:15
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="timeline-item current">
+
+                                <div class="timeline-icon">
+                                    <i class="bi bi-tools"></i>
+                                </div>
+
+                                <div class="timeline-text">
+
+                                    <strong>
+                                        Revisão em execução
+                                    </strong>
+
+                                    <span>
+                                        Mecânico trabalhando agora
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="timeline-item">
+
+                                <div class="timeline-icon">
+                                    <i class="bi bi-flag"></i>
+                                </div>
+
+                                <div class="timeline-text">
+
+                                    <strong>
+                                        Entrega do veículo
+                                    </strong>
+
+                                    <span>
+                                        Previsão: hoje, 17:30
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =====================================
+                 MENSAGEM
+            ====================================== -->
+
+            <div class="row mb-4">
+
+                <div class="col-12">
+
+                    <div class="message-box">
+
+                        <div class="mechanic-avatar">
+                            RM
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                Rafael, seu mecânico
+                            </strong>
+
+                            <p>
+                                "Já identificamos o desgaste das pastilhas.
+                                Vou te mandar os detalhes do diagnóstico."
+                            </p>
+
+                        </div>
+
+
+                        <a
+                            href="/pagina/producao"
+                            class="message-button"
+                        >
+                            Responder
+                            <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =====================================
+                 ATIVIDADE + ORÇAMENTO
+            ====================================== -->
+
+            <div class="row g-4 mb-4">
+
+
+                <!-- ATIVIDADE -->
+
+                <div class="col-lg-7">
+
+                    <div class="white-card">
+
+                        <div class="card-header-custom">
+
+                            <h3>
+                                Atividade recente
+                            </h3>
+
+                            <a
+                                href="/pagina/producao"
+                                class="see-all"
+                            >
+                                Ver tudo
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+
+                        </div>
+
+
+                        <div class="activity">
+
+                            <div class="activity-icon">
+                                <i class="bi bi-camera-fill"></i>
+                            </div>
+
+                            <div class="activity-content">
+
+                                <strong>
+                                    Novas fotos adicionadas
+                                </strong>
+
+                                <p>
+                                    Rafael adicionou 3 fotos do sistema de freios.
+                                </p>
+
+                                <span class="activity-time">
+                                    Há 18 minutos
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="activity">
+
+                            <div class="activity-icon">
+                                <i class="bi bi-search"></i>
+                            </div>
+
+                            <div class="activity-content">
+
+                                <strong>
+                                    Diagnóstico concluído
+                                </strong>
+
+                                <p>
+                                    Foram encontrados 2 itens que precisam de atenção.
+                                </p>
+
+                                <span class="activity-time">
+                                    Há 42 minutos
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="activity">
+
+                            <div class="activity-icon">
+                                <i class="bi bi-chat-left-text-fill"></i>
+                            </div>
+
+                            <div class="activity-content">
+
+                                <strong>
+                                    Nova mensagem da oficina
+                                </strong>
+
+                                <p>
+                                    "O serviço está evoluindo conforme planejado."
+                                </p>
+
+                                <span class="activity-time">
+                                    Há 1 hora
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="activity">
+
+                            <div class="activity-icon">
+                                <i class="bi bi-check2-circle"></i>
+                            </div>
+
+                            <div class="activity-content">
+
+                                <strong>
+                                    Óleo e filtro aprovados
+                                </strong>
+
+                                <p>
+                                    Serviço autorizado pelo cliente.
+                                </p>
+
+                                <span class="activity-time">
+                                    Hoje, 11:04
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ORÇAMENTO -->
+
+                <div class="col-lg-5">
+
+                    <div class="white-card">
+
+                        <div class="card-header-custom">
+
+                            <h3>
+                                Orçamento
+                            </h3>
+
+                            <span
+                                class="badge text-bg-warning"
+                            >
+                                Em análise
+                            </span>
+
+                        </div>
+
+
+                        <div class="budget-value">
+                            R$ 1.284,90
+                        </div>
+
+                        <div class="budget-sub mb-3">
+                            Valor estimado do serviço
+                        </div>
+
+
+                        <div class="budget-row">
+
+                            <span>
+                                Revisão
+                            </span>
+
+                            <span>
+                                R$ 350,00
+                            </span>
+
+                        </div>
+
+
+                        <div class="budget-row">
+
+                            <span>
+                                Óleo + filtros
+                            </span>
+
+                            <span>
+                                R$ 284,90
+                            </span>
+
+                        </div>
+
+
+                        <div class="budget-row">
+
+                            <span>
+                                Pastilhas de freio
+                            </span>
+
+                            <span>
+                                R$ 450,00
+                            </span>
+
+                        </div>
+
+
+                        <div class="budget-row">
+
+                            <span>
+                                Mão de obra
+                            </span>
+
+                            <span>
+                                R$ 200,00
+                            </span>
+
+                        </div>
+
+
+                        <div class="budget-total">
+
+                            <span>
+                                Total
+                            </span>
+
+                            <span>
+                                R$ 1.284,90
+                            </span>
+
+                        </div>
+
+
+                        <a
+                            href="/pagina/producao"
+                            class="btn-yellow w-100 justify-content-center mt-4"
+                        >
+                            Ver orçamento completo
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =====================================
+                 FOTOS + PRÓXIMO PASSO
+            ====================================== -->
+
+            <div class="row g-4">
+
+
+                <!-- FOTOS -->
+
+                <div class="col-lg-7">
+
+                    <div class="white-card">
+
+                        <div class="card-header-custom">
+
+                            <h3>
+                                Diário do veículo
+                            </h3>
+
+                            <a
+                                href="/pagina/producao"
+                                class="see-all"
+                            >
+                                Ver diário
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+
+                        </div>
+
+
+                        <p
+                            class="text-secondary"
+                            style="font-size: 12px;"
+                        >
+                            Acompanhe fotos e atualizações adicionadas
+                            pela oficina durante o serviço.
+                        </p>
+
+
+                        <div class="photo-grid mt-3">
+
+                            <div class="photo">
+                                <i class="bi bi-image"></i>
+                                <span>
+                                    Freios
+                                </span>
+                            </div>
+
+
+                            <div class="photo">
+                                <i class="bi bi-image"></i>
+                                <span>
+                                    Motor
+                                </span>
+                            </div>
+
+
+                            <div class="photo">
+                                <i class="bi bi-image"></i>
+                                <span>
+                                    Oficina
+                                </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PRÓXIMO PASSO -->
+
+                <div class="col-lg-5">
+
+                    <div
+                        class="white-card"
+                        style="
+                            background: #111;
+                            color: white;
+                        "
+                    >
+
+                        <div
+                            style="
+                                color: #f5b400;
+                                font-size: 12px;
+                                font-weight: 800;
+                                text-transform: uppercase;
+                                letter-spacing: 1px;
+                            "
+                        >
+                            Próximo passo
+                        </div>
+
+
+                        <h3
+                            class="mt-2"
+                            style="
+                                font-size: 21px;
+                                font-weight: 800;
+                            "
+                        >
+                            Aprovar o serviço
+                        </h3>
+
+
+                        <p
+                            style="
+                                color: #999;
+                                font-size: 12px;
+                                line-height: 1.6;
+                            "
+                        >
+                            A oficina encontrou um desgaste nas
+                            pastilhas de freio. Confira os detalhes
+                            antes de autorizar.
+                        </p>
+
+
+                        <a
+                            href="/pagina/producao"
+                            class="btn-yellow w-100 justify-content-center mt-2"
+                        >
+                            Conferir diagnóstico
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- Bootstrap JS -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"
+    ></script>
+
+
+    <!--
+        Todos os elementos são demonstrativos.
+        Os links/botões apontam para /pagina/producao.
+    -->
+
+</body>
+
+</html>
