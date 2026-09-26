@@ -1,0 +1,264 @@
+/* ================================
+   CONFIGURAÇÃO GERAL
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+
+    /* IMAGEM DE FUNDO */
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.25),
+            rgba(0, 0, 0, 0.25)
+        ),
+        url("arquivo-carros.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* ================================
+   CONTAINER PRINCIPAL
+================================ */
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    min-height: 650px;
+
+    background: rgba(255, 255, 255, 0.97);
+
+    border-radius: 25px;
+
+    display: flex;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+
+/* ================================
+   LADO ESQUERDO
+================================ */
+
+.left-side {
+    width: 50%;
+
+    padding: 60px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background: #ffffff;
+}
+
+
+/* LOGO */
+
+.logo {
+    width: 180px;
+    margin-bottom: 30px;
+}
+
+
+/* TÍTULOS */
+
+h1 {
+    font-size: 42px;
+    font-weight: 800;
+
+    color: #111;
+
+    margin-bottom: 10px;
+}
+
+h1 span {
+    color: #f5b400;
+}
+
+.subtitle {
+    font-size: 16px;
+
+    color: #555;
+
+    line-height: 1.6;
+
+    max-width: 450px;
+}
+
+
+/* ================================
+   LADO DIREITO
+================================ */
+
+.right-side {
+    width: 50%;
+
+    padding: 60px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background: #fff;
+}
+
+
+/* TÍTULO LOGIN */
+
+.right-side h2 {
+    font-size: 32px;
+
+    color: #111;
+
+    margin-bottom: 30px;
+}
+
+
+/* ================================
+   CAMPOS
+================================ */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    color: #222;
+
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+
+    height: 55px;
+
+    padding: 0 18px;
+
+    border: 1px solid #d8d8d8;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-size: 15px;
+
+    transition: 0.2s;
+}
+
+.form-group input:focus {
+    border-color: #f5b400;
+
+    box-shadow:
+        0 0 0 3px rgba(245, 180, 0, 0.15);
+}
+
+
+/* ================================
+   BOTÃO
+================================ */
+
+.btn {
+    width: 100%;
+
+    height: 55px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #f5b400;
+
+    color: #111;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background: #e0a300;
+
+    transform: translateY(-1px);
+}
+
+
+/* ================================
+   LINKS
+================================ */
+
+.links {
+    margin-top: 20px;
+
+    text-align: center;
+}
+
+.links a {
+    color: #e3a900;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+
+/* ================================
+   RESPONSIVIDADE
+================================ */
+
+@media (max-width: 800px) {
+
+    body {
+        padding: 20px;
+    }
+
+    .container {
+        width: 100%;
+
+        flex-direction: column;
+
+        min-height: auto;
+    }
+
+    .left-side,
+    .right-side {
+        width: 100%;
+
+        padding: 40px 30px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+}
