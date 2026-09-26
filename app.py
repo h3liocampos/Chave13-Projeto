@@ -1,8 +1,7 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory, abort
 import mysql.connector
 from dotenv import load_dotenv
 import os
-
 load_dotenv()
 app = Flask(__name__)
 
@@ -97,6 +96,15 @@ class Carro:
         self.id = id
 
 
+
+
+
+
+
+
+
+
+
 class Peca:
     def __init__(self, manutencao_id, nome, descricao, preco_unitario, id=None):
         self.manutencao_id = manutencao_id
@@ -120,6 +128,31 @@ class Endereco:
         self.complemento = complemento
         self.observacao = observacao
         self.id = id
+
+
+# Caminho absoluto para o diretório onde estão os arquivos HTML
+HTML_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "frontend")
+
+@app.route("/pagina/<nome_arquivo>")
+def servir_html(nome_arquivo):
+    try:
+        # # Valida extensão para evitar servir arquivos indevidos
+        # if not nome_arquivo.endswith(".html"):
+        #     abort(403)  # Proibido
+
+        # Envia o arquivo do diretório especificado
+        return send_from_directory(
+            HTML_DIR,
+            nome_arquivo,
+            mimetype="text/html"
+        )
+    except FileNotFoundError:
+        abort(404)  # Arquivo não encontrado
+
+# if __name__ == "__main__":
+#     # Cria o diretório se não existir
+#     os.makedirs(HTML_DIR, exist_ok=True)
+#     app.run(debug=True)
 
 
 @app.route('/api/estabelecimentos', methods=['POST'])
