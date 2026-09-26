@@ -1,0 +1,2119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CHAVE13 - Conversas</title>
+
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+
+    <style>
+
+        :root {
+            --amarelo: #f5b400;
+            --amarelo-hover: #dca300;
+
+            --preto: #111111;
+            --preto-2: #181818;
+
+            --cinza-bg: #f5f5f5;
+            --cinza: #737373;
+
+            --borda: #e8e8e8;
+
+            --verde: #19a463;
+            --azul: #3478f6;
+        }
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            margin: 0;
+
+            background: var(--cinza-bg);
+
+            color: #171717;
+
+            font-family:
+                Inter,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+        }
+
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* ==================================================
+           SIDEBAR
+        ================================================== */
+
+        .sidebar {
+            position: fixed;
+
+            left: 0;
+            top: 0;
+
+            width: 250px;
+            height: 100vh;
+
+            background: var(--preto);
+
+            color: white;
+
+            padding: 28px 18px;
+
+            z-index: 1000;
+        }
+
+
+        .logo {
+            padding: 0 15px;
+
+            margin-bottom: 42px;
+
+            font-size: 26px;
+
+            font-weight: 900;
+
+            letter-spacing: -1px;
+        }
+
+
+        .logo span {
+            color: var(--amarelo);
+        }
+
+
+        .menu-title {
+            padding: 0 15px;
+
+            margin-bottom: 12px;
+
+            color: #777;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+        }
+
+
+        .menu {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 5px;
+        }
+
+
+        .menu a {
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 13px 15px;
+
+            border-radius: 10px;
+
+            color: #a8a8a8;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: .2s;
+        }
+
+
+        .menu a:hover {
+            background: #242424;
+
+            color: white;
+        }
+
+
+        .menu a.active {
+            background: #242424;
+
+            color: white;
+
+            border-left: 3px solid var(--amarelo);
+        }
+
+
+        .menu i {
+            width: 20px;
+
+            font-size: 17px;
+        }
+
+
+        .menu-badge {
+            margin-left: auto;
+
+            min-width: 20px;
+
+            padding: 2px 6px;
+
+            border-radius: 20px;
+
+            background: var(--amarelo);
+
+            color: #111;
+
+            text-align: center;
+
+            font-size: 9px;
+
+            font-weight: 900;
+        }
+
+
+        .sidebar-bottom {
+            position: absolute;
+
+            left: 18px;
+            right: 18px;
+
+            bottom: 25px;
+
+            padding: 16px;
+
+            border-radius: 13px;
+
+            background: #1c1c1c;
+        }
+
+
+        .user-mini {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: var(--amarelo);
+
+            color: #111;
+
+            font-weight: 800;
+        }
+
+
+        .user-mini strong {
+            display: block;
+
+            color: white;
+
+            font-size: 13px;
+        }
+
+
+        .user-mini small {
+            color: #777;
+        }
+
+
+        /* ==================================================
+           MAIN
+        ================================================== */
+
+        .main {
+            margin-left: 250px;
+
+            min-height: 100vh;
+        }
+
+
+        /* ==================================================
+           TOPBAR
+        ================================================== */
+
+        .topbar {
+            height: 76px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 38px;
+
+            background: white;
+
+            border-bottom: 1px solid var(--borda);
+        }
+
+
+        .topbar h6 {
+            margin: 0;
+
+            font-weight: 800;
+        }
+
+
+        .notification {
+            position: relative;
+
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            color: #555;
+        }
+
+
+        .notification:hover {
+            background: #f5f5f5;
+        }
+
+
+        .notification-dot {
+            position: absolute;
+
+            width: 8px;
+            height: 8px;
+
+            right: 7px;
+            top: 7px;
+
+            background: var(--amarelo);
+
+            border: 2px solid white;
+
+            border-radius: 50%;
+        }
+
+
+        /* ==================================================
+           CONTENT
+        ================================================== */
+
+        .content {
+            padding: 35px 38px 50px;
+
+            max-width: 1500px;
+        }
+
+
+        .page-header {
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: space-between;
+
+            margin-bottom: 25px;
+        }
+
+
+        .page-header h1 {
+            margin: 0 0 6px;
+
+            font-size: 29px;
+
+            font-weight: 850;
+
+            letter-spacing: -1px;
+        }
+
+
+        .page-header p {
+            margin: 0;
+
+            color: var(--cinza);
+
+            font-size: 14px;
+        }
+
+
+        .btn-yellow {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            padding: 11px 18px;
+
+            border: 0;
+
+            border-radius: 9px;
+
+            background: var(--amarelo);
+
+            color: #111;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            transition: .2s;
+        }
+
+
+        .btn-yellow:hover {
+            background: var(--amarelo-hover);
+
+            color: #111;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* ==================================================
+           CHAT AREA
+        ================================================== */
+
+        .chat-wrapper {
+            display: grid;
+
+            grid-template-columns: 340px 1fr;
+
+            height: 650px;
+
+            overflow: hidden;
+
+            background: white;
+
+            border: 1px solid var(--borda);
+
+            border-radius: 18px;
+
+            box-shadow: 0 5px 20px rgba(0,0,0,.03);
+        }
+
+
+        /* ==================================================
+           CONVERSAS
+        ================================================== */
+
+        .conversation-list {
+            overflow-y: auto;
+
+            border-right: 1px solid var(--borda);
+        }
+
+
+        .conversation-header {
+            padding: 20px;
+
+            border-bottom: 1px solid var(--borda);
+        }
+
+
+        .conversation-header-top {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 15px;
+        }
+
+
+        .conversation-header h3 {
+            margin: 0;
+
+            font-size: 16px;
+
+            font-weight: 850;
+        }
+
+
+        .new-chat {
+            width: 32px;
+            height: 32px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #fff5d6;
+
+            color: #9a7000;
+
+            cursor: pointer;
+        }
+
+
+        .search-box {
+            position: relative;
+        }
+
+
+        .search-box i {
+            position: absolute;
+
+            left: 12px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #aaa;
+
+            font-size: 13px;
+        }
+
+
+        .search-box input {
+            width: 100%;
+
+            padding: 10px 12px 10px 34px;
+
+            border: 1px solid #e5e5e5;
+
+            border-radius: 9px;
+
+            outline: none;
+
+            background: #f8f8f8;
+
+            font-size: 11px;
+        }
+
+
+        .search-box input:focus {
+            border-color: var(--amarelo);
+        }
+
+
+        .conversation {
+            display: flex;
+
+            gap: 12px;
+
+            padding: 17px 18px;
+
+            cursor: pointer;
+
+            border-bottom: 1px solid #f3f3f3;
+
+            transition: .15s;
+        }
+
+
+        .conversation:hover {
+            background: #fafafa;
+        }
+
+
+        .conversation.active {
+            background: #fff9e8;
+
+            border-left: 3px solid var(--amarelo);
+        }
+
+
+        .conversation-avatar {
+            position: relative;
+
+            flex-shrink: 0;
+
+            width: 43px;
+            height: 43px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: #111;
+
+            color: var(--amarelo);
+
+            font-size: 15px;
+
+            font-weight: 850;
+        }
+
+
+        .online {
+            position: absolute;
+
+            right: -2px;
+            bottom: -2px;
+
+            width: 11px;
+            height: 11px;
+
+            border: 2px solid white;
+
+            border-radius: 50%;
+
+            background: var(--verde);
+        }
+
+
+        .conversation-content {
+            min-width: 0;
+
+            flex: 1;
+        }
+
+
+        .conversation-top {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 5px;
+        }
+
+
+        .conversation-top strong {
+            overflow: hidden;
+
+            color: #222;
+
+            font-size: 12px;
+
+            text-overflow: ellipsis;
+
+            white-space: nowrap;
+        }
+
+
+        .conversation-top time {
+            flex-shrink: 0;
+
+            color: #aaa;
+
+            font-size: 9px;
+        }
+
+
+        .conversation-message {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 7px;
+
+            margin-top: 5px;
+        }
+
+
+        .conversation-message span {
+            overflow: hidden;
+
+            color: #999;
+
+            font-size: 10px;
+
+            text-overflow: ellipsis;
+
+            white-space: nowrap;
+        }
+
+
+        .unread {
+            min-width: 18px;
+
+            padding: 2px 5px;
+
+            border-radius: 20px;
+
+            background: var(--amarelo);
+
+            color: #111;
+
+            text-align: center;
+
+            font-size: 8px;
+
+            font-weight: 900;
+        }
+
+
+        /* ==================================================
+           CHAT
+        ================================================== */
+
+        .chat {
+            display: flex;
+
+            flex-direction: column;
+
+            min-width: 0;
+        }
+
+
+        .chat-header {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            min-height: 76px;
+
+            padding: 15px 22px;
+
+            border-bottom: 1px solid var(--borda);
+        }
+
+
+        .chat-person {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .chat-person-avatar {
+            width: 43px;
+            height: 43px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: #111;
+
+            color: var(--amarelo);
+
+            font-size: 15px;
+
+            font-weight: 850;
+        }
+
+
+        .chat-person strong {
+            display: block;
+
+            font-size: 13px;
+        }
+
+
+        .chat-person span {
+            display: flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+            margin-top: 3px;
+
+            color: #999;
+
+            font-size: 9px;
+        }
+
+
+        .online-text {
+            color: var(--verde);
+        }
+
+
+        .chat-actions {
+            display: flex;
+
+            gap: 5px;
+        }
+
+
+        .chat-action {
+            width: 34px;
+            height: 34px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border: 0;
+
+            border-radius: 8px;
+
+            background: transparent;
+
+            color: #777;
+
+            cursor: pointer;
+        }
+
+
+        .chat-action:hover {
+            background: #f5f5f5;
+
+            color: #222;
+        }
+
+
+        /* ==================================================
+           VEHICLE CONTEXT
+        ================================================== */
+
+        .vehicle-context {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin: 14px 22px;
+
+            padding: 11px 13px;
+
+            border-radius: 10px;
+
+            background: #f8f8f8;
+        }
+
+
+        .vehicle-context-icon {
+            width: 34px;
+            height: 34px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 9px;
+
+            background: #fff5d6;
+
+            color: #a87300;
+        }
+
+
+        .vehicle-context strong {
+            display: block;
+
+            font-size: 10px;
+        }
+
+
+        .vehicle-context span {
+            color: #999;
+
+            font-size: 9px;
+        }
+
+
+        .vehicle-context a {
+            margin-left: auto;
+
+            color: #777;
+
+            font-size: 9px;
+
+            font-weight: 800;
+        }
+
+
+        /* ==================================================
+           MESSAGES
+        ================================================== */
+
+        .messages {
+            flex: 1;
+
+            overflow-y: auto;
+
+            padding: 15px 28px 25px;
+
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(245,180,0,.035) 0,
+                    rgba(245,180,0,.035) 1px,
+                    transparent 1px
+                );
+
+            background-size: 25px 25px;
+        }
+
+
+        .day-separator {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin: 8px 0 22px;
+
+            color: #aaa;
+
+            font-size: 9px;
+
+            font-weight: 700;
+        }
+
+
+        .day-separator::before,
+        .day-separator::after {
+            content: "";
+
+            flex: 1;
+
+            height: 1px;
+
+            background: #ededed;
+        }
+
+
+        .message-row {
+            display: flex;
+
+            margin-bottom: 15px;
+        }
+
+
+        .message-row.received {
+            justify-content: flex-start;
+        }
+
+
+        .message-row.sent {
+            justify-content: flex-end;
+        }
+
+
+        .message {
+            max-width: 68%;
+
+            padding: 11px 14px;
+
+            border-radius: 13px;
+
+            font-size: 11px;
+
+            line-height: 1.55;
+        }
+
+
+        .received .message {
+            border-bottom-left-radius: 4px;
+
+            background: white;
+
+            border: 1px solid #ededed;
+
+            color: #444;
+        }
+
+
+        .sent .message {
+            border-bottom-right-radius: 4px;
+
+            background: var(--preto);
+
+            color: white;
+        }
+
+
+        .message-meta {
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 6px;
+
+            margin-top: 5px;
+
+            color: #aaa;
+
+            font-size: 8px;
+        }
+
+
+        .sent .message-meta {
+            color: #777;
+        }
+
+
+        .message-meta i {
+            color: var(--amarelo);
+        }
+
+
+        /* ==================================================
+           IMAGE MESSAGE
+        ================================================== */
+
+        .photo-message {
+            overflow: hidden;
+
+            margin-bottom: 6px;
+
+            border-radius: 10px;
+
+            background: #222;
+        }
+
+
+        .photo-placeholder {
+            width: 240px;
+            height: 135px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #292929,
+                    #111
+                );
+
+            color: #aaa;
+        }
+
+
+        .photo-placeholder i {
+            margin-bottom: 6px;
+
+            color: var(--amarelo);
+
+            font-size: 28px;
+        }
+
+
+        .photo-placeholder span {
+            font-size: 9px;
+        }
+
+
+        /* ==================================================
+           QUICK ACTIONS
+        ================================================== */
+
+        .quick-actions {
+            display: flex;
+
+            gap: 7px;
+
+            padding: 10px 22px;
+
+            border-top: 1px solid #f0f0f0;
+
+            background: #fff;
+
+            overflow-x: auto;
+        }
+
+
+        .quick-button {
+            white-space: nowrap;
+
+            padding: 7px 10px;
+
+            border: 1px solid #e5e5e5;
+
+            border-radius: 20px;
+
+            background: white;
+
+            color: #777;
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        .quick-button:hover {
+            border-color: var(--amarelo);
+
+            background: #fffaf0;
+
+            color: #555;
+        }
+
+
+        /* ==================================================
+           INPUT
+        ================================================== */
+
+        .chat-input-area {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 13px 18px;
+
+            border-top: 1px solid var(--borda);
+
+            background: white;
+        }
+
+
+        .input-action {
+            width: 37px;
+            height: 37px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #f5f5f5;
+
+            color: #777;
+
+            cursor: pointer;
+        }
+
+
+        .input-action:hover {
+            background: #eeeeee;
+
+            color: #333;
+        }
+
+
+        .message-input {
+            flex: 1;
+
+            height: 40px;
+
+            padding: 10px 14px;
+
+            border: 1px solid #e4e4e4;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-size: 11px;
+        }
+
+
+        .message-input:focus {
+            border-color: var(--amarelo);
+
+            box-shadow: 0 0 0 3px rgba(245,180,0,.08);
+        }
+
+
+        .send-button {
+            width: 40px;
+            height: 40px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border: 0;
+
+            border-radius: 10px;
+
+            background: var(--amarelo);
+
+            color: #111;
+
+            cursor: pointer;
+
+            transition: .2s;
+        }
+
+
+        .send-button:hover {
+            background: var(--amarelo-hover);
+
+            transform: translateY(-1px);
+        }
+
+
+        /* ==================================================
+           RESPONSIVO
+        ================================================== */
+
+        @media (max-width: 1100px) {
+
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                margin-left: 210px;
+            }
+
+            .content {
+                padding: 25px;
+            }
+
+            .chat-wrapper {
+                grid-template-columns: 290px 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 800px) {
+
+            .sidebar {
+                position: static;
+
+                width: 100%;
+
+                height: auto;
+
+                padding: 15px;
+            }
+
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+
+            .menu-title,
+            .sidebar-bottom {
+                display: none;
+            }
+
+
+            .menu {
+                flex-direction: row;
+
+                overflow-x: auto;
+            }
+
+
+            .menu a {
+                white-space: nowrap;
+            }
+
+
+            .main {
+                margin-left: 0;
+            }
+
+
+            .topbar {
+                padding: 0 20px;
+            }
+
+
+            .content {
+                padding: 22px 15px 40px;
+            }
+
+
+            .page-header {
+                display: block;
+            }
+
+
+            .page-header .btn-yellow {
+                margin-top: 16px;
+            }
+
+
+            .chat-wrapper {
+                grid-template-columns: 1fr;
+
+                height: auto;
+            }
+
+
+            .conversation-list {
+                display: none;
+            }
+
+
+            .chat {
+                min-height: 650px;
+            }
+
+
+            .message {
+                max-width: 82%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==================================================
+         SIDEBAR
+    ================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            CHAVE <span>13</span>
+        </div>
+
+
+        <div class="menu-title">
+            Minha oficina
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="/pagina/dashboard.html">
+                <i class="bi bi-grid-1x2-fill"></i>
+                Visão geral
+            </a>
+
+
+            <a href="/pagina/meus-veiculos.html">
+                <i class="bi bi-car-front-fill"></i>
+                Meus veículos
+            </a>
+
+
+            <a href="/pagina/servicos.html">
+                <i class="bi bi-tools"></i>
+                Serviços
+            </a>
+
+
+            <a
+                href="/pagina/conversas.html"
+                class="active"
+            >
+                <i class="bi bi-chat-dots-fill"></i>
+                Conversas
+
+                <span class="menu-badge">
+                    2
+                </span>
+
+            </a>
+
+
+            <a href="/pagina/orcamentos.html">
+                <i class="bi bi-receipt"></i>
+                Orçamentos
+            </a>
+
+
+            <a href="/pagina/historico.html">
+                <i class="bi bi-clock-history"></i>
+                Histórico
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="user-mini">
+
+                <div class="avatar">
+                    JS
+                </div>
+
+                <div>
+                    <strong>João Silva</strong>
+                    <small>Cliente</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- ==================================================
+         MAIN
+    ================================================== -->
+
+    <main class="main">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <h6>
+                Conversas
+            </h6>
+
+
+            <a
+                href="/pagina/producao"
+                class="notification"
+            >
+
+                <i class="bi bi-bell fs-5"></i>
+
+                <span class="notification-dot"></span>
+
+            </a>
+
+        </header>
+
+
+
+        <!-- ==================================================
+             CONTENT
+        ================================================== -->
+
+        <div class="content">
+
+
+            <!-- HEADER -->
+
+            <div class="page-header">
+
+                <div>
+
+                    <h1>
+                        Conversas
+                    </h1>
+
+                    <p>
+                        Fale diretamente com as oficinas que cuidam dos seus veículos.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="/pagina/producao"
+                    class="btn-yellow"
+                >
+
+                    <i class="bi bi-plus-lg"></i>
+
+                    Nova conversa
+
+                </a>
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 CHAT
+            ================================================== -->
+
+            <div class="chat-wrapper">
+
+
+                <!-- ==================================================
+                     LISTA DE CONVERSAS
+                ================================================== -->
+
+                <aside class="conversation-list">
+
+
+                    <div class="conversation-header">
+
+                        <div class="conversation-header-top">
+
+                            <h3>
+                                Suas conversas
+                            </h3>
+
+
+                            <a
+                                href="/pagina/producao"
+                                class="new-chat"
+                            >
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+
+                        </div>
+
+
+                        <div class="search-box">
+
+                            <i class="bi bi-search"></i>
+
+                            <input
+                                type="text"
+                                placeholder="Buscar conversa..."
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CONVERSA 1 -->
+
+                    <div class="conversation active">
+
+                        <div class="conversation-avatar">
+
+                            AC
+
+                            <span class="online"></span>
+
+                        </div>
+
+
+                        <div class="conversation-content">
+
+                            <div class="conversation-top">
+
+                                <strong>
+                                    Auto Center 13
+                                </strong>
+
+                                <time>
+                                    14:32
+                                </time>
+
+                            </div>
+
+
+                            <div class="conversation-message">
+
+                                <span>
+                                    O mecânico enviou novas fotos...
+                                </span>
+
+                                <b class="unread">
+                                    2
+                                </b>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CONVERSA 2 -->
+
+                    <div class="conversation">
+
+                        <div class="conversation-avatar">
+
+                            OC
+
+                        </div>
+
+
+                        <div class="conversation-content">
+
+                            <div class="conversation-top">
+
+                                <strong>
+                                    Oficina Central
+                                </strong>
+
+                                <time>
+                                    Ontem
+                                </time>
+
+                            </div>
+
+
+                            <div class="conversation-message">
+
+                                <span>
+                                    Seu Corolla está pronto para retirada.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CONVERSA 3 -->
+
+                    <div class="conversation">
+
+                        <div class="conversation-avatar">
+
+                            MA
+
+                        </div>
+
+
+                        <div class="conversation-content">
+
+                            <div class="conversation-top">
+
+                                <strong>
+                                    Mecânica Avenida
+                                </strong>
+
+                                <time>
+                                    12 Jun
+                                </time>
+
+                            </div>
+
+
+                            <div class="conversation-message">
+
+                                <span>
+                                    Podemos verificar o veículo amanhã.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CONVERSA 4 -->
+
+                    <div class="conversation">
+
+                        <div class="conversation-avatar">
+
+                            RS
+
+                        </div>
+
+
+                        <div class="conversation-content">
+
+                            <div class="conversation-top">
+
+                                <strong>
+                                    Renato Serviços Automotivos
+                                </strong>
+
+                                <time>
+                                    08 Jun
+                                </time>
+
+                            </div>
+
+
+                            <div class="conversation-message">
+
+                                <span>
+                                    Orçamento enviado para aprovação.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </aside>
+
+
+
+                <!-- ==================================================
+                     CHAT PRINCIPAL
+                ================================================== -->
+
+                <section class="chat">
+
+
+                    <!-- HEADER CHAT -->
+
+                    <div class="chat-header">
+
+                        <div class="chat-person">
+
+                            <div class="chat-person-avatar">
+                                AC
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Auto Center 13
+                                </strong>
+
+
+                                <span>
+
+                                    <i
+                                        class="bi bi-circle-fill online-text"
+                                        style="font-size: 6px;"
+                                    ></i>
+
+                                    Online agora
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="chat-actions">
+
+                            <a
+                                href="/pagina/producao"
+                                class="chat-action"
+                                title="Ver oficina"
+                            >
+                                <i class="bi bi-shop"></i>
+                            </a>
+
+
+                            <a
+                                href="/pagina/producao"
+                                class="chat-action"
+                                title="Mais opções"
+                            >
+                                <i class="bi bi-three-dots"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- VEÍCULO -->
+
+                    <div class="vehicle-context">
+
+                        <div class="vehicle-context-icon">
+
+                            <i class="bi bi-car-front-fill"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                Honda Civic Touring • ABC-1D23
+                            </strong>
+
+                            <span>
+                                Revisão completa em andamento • 48.230 km
+                            </span>
+
+                        </div>
+
+
+                        <a href="/pagina/producao">
+
+                            Ver serviço
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+
+
+                    <!-- ==================================================
+                         MENSAGENS
+                    ================================================== -->
+
+                    <div class="messages">
+
+
+                        <div class="day-separator">
+                            HOJE
+                        </div>
+
+
+
+                        <!-- RECEBIDA -->
+
+                        <div class="message-row received">
+
+                            <div class="message">
+
+                                Bom dia, João! Tudo bem?
+
+                                <div class="message-meta">
+
+                                    09:14
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- ENVIADA -->
+
+                        <div class="message-row sent">
+
+                            <div class="message">
+
+                                Bom dia! Tudo certo. Como está
+                                a revisão do Civic?
+
+                                <div class="message-meta">
+
+                                    09:16
+
+                                    <i class="bi bi-check2-all"></i>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- RECEBIDA -->
+
+                        <div class="message-row received">
+
+                            <div class="message">
+
+                                Estamos avançando bem. Já terminamos
+                                a troca de óleo e os filtros.
+
+                                <div class="message-meta">
+
+                                    09:20
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- FOTO -->
+
+                        <div class="message-row received">
+
+                            <div class="message">
+
+                                <div class="photo-message">
+
+                                    <div class="photo-placeholder">
+
+                                        <i class="bi bi-image"></i>
+
+                                        <span>
+                                            Foto enviada pela oficina
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                Também identificamos que as pastilhas
+                                dianteiras estão próximas do limite.
+                                Vou enviar as fotos para você avaliar.
+
+                                <div class="message-meta">
+
+                                    10:02
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- ENVIADA -->
+
+                        <div class="message-row sent">
+
+                            <div class="message">
+
+                                Entendi. Pode me enviar o orçamento
+                                da troca das pastilhas?
+
+                                <div class="message-meta">
+
+                                    10:05
+
+                                    <i class="bi bi-check2-all"></i>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- RECEBIDA -->
+
+                        <div class="message-row received">
+
+                            <div class="message">
+
+                                Claro! Já preparei o orçamento.
+
+                                <br><br>
+
+                                O valor estimado é de
+                                <strong>
+                                    R$ 480,00
+                                </strong>
+                                com peças e mão de obra.
+
+                                <div class="message-meta">
+
+                                    10:09
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- ENVIADA -->
+
+                        <div class="message-row sent">
+
+                            <div class="message">
+
+                                Perfeito. Vou analisar.
+
+                                <div class="message-meta">
+
+                                    10:11
+
+                                    <i class="bi bi-check2-all"></i>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- RECEBIDA -->
+
+                        <div class="message-row received">
+
+                            <div class="message">
+
+                                Sem problema. A revisão principal
+                                continua normalmente enquanto você
+                                avalia.
+
+                                <div class="message-meta">
+
+                                    14:32
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- ==================================================
+                         RESPOSTAS RÁPIDAS
+                    ================================================== -->
+
+                    <div class="quick-actions">
+
+                        <a
+                            href="/pagina/producao"
+                            class="quick-button"
+                        >
+                            Como está o veículo?
+                        </a>
+
+
+                        <a
+                            href="/pagina/producao"
+                            class="quick-button"
+                        >
+                            Enviar foto
+                        </a>
+
+
+                        <a
+                            href="/pagina/producao"
+                            class="quick-button"
+                        >
+                            Pedir orçamento
+                        </a>
+
+
+                        <a
+                            href="/pagina/producao"
+                            class="quick-button"
+                        >
+                            Quando fica pronto?
+                        </a>
+
+                    </div>
+
+
+
+                    <!-- ==================================================
+                         INPUT
+                    ================================================== -->
+
+                    <div class="chat-input-area">
+
+                        <a
+                            href="/pagina/producao"
+                            class="input-action"
+                            title="Anexar arquivo"
+                        >
+                            <i class="bi bi-paperclip"></i>
+                        </a>
+
+
+                        <input
+                            type="text"
+                            class="message-input"
+                            placeholder="Digite uma mensagem..."
+                        >
+
+
+                        <a
+                            href="/pagina/producao"
+                            class="input-action"
+                            title="Enviar foto"
+                        >
+                            <i class="bi bi-camera"></i>
+                        </a>
+
+
+                        <a
+                            href="/pagina/producao"
+                            class="send-button"
+                            title="Enviar mensagem"
+                        >
+                            <i class="bi bi-send-fill"></i>
+                        </a>
+
+                    </div>
+
+
+                </section>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- Bootstrap JS -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    ></script>
+
+</body>
+
+</html>
