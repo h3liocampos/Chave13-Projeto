@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CHAVE 13 - Login</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- LADO ESQUERDO -->
+        <div class="left-side">
+
+            <div class="logo">
+                CHAVE <span>13</span>
+            </div>
+
+            <h1>Bem-vindo!</h1>
+
+            <p class="subtitle">
+                Entre na sua conta para continuar.
+            </p>
+
+            <form id="loginForm">
+
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Digite seu e-mail"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+
+                    <label for="senha">Senha</label>
+
+                    <input
+                        type="password"
+                        id="senha"
+                        placeholder="Digite sua senha"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn"
+                >
+                    Entrar
+                </button>
+
+                <div id="mensagem"></div>
+
+            </form>
+
+            <div class="links">
+
+                <p>
+                    Ainda não possui uma conta?
+                </p>
+
+                <br>
+
+                <a href="/cadastro">
+                    Criar uma conta
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- LADO DIREITO -->
+        <div class="right-side">
+
+            <h2>
+                Gestão simples para sua oficina.
+            </h2>
+
+            <p class="subtitle">
+                O CHAVE 13 conecta clientes e mecânicas
+                em um só lugar, facilitando o controle
+                dos serviços e manutenções.
+            </p>
+
+            <br>
+
+            <p class="subtitle">
+                ✓ Controle de manutenções
+            </p>
+
+            <p class="subtitle">
+                ✓ Cadastro de veículos
+            </p>
+        
+
+            <p class="subtitle">
+                ✓ Organização da oficina
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+
+</body>
+
+</html>
